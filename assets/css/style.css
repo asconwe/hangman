@@ -15,16 +15,44 @@ body {
 	margin-left: 200px;
 }
 
+.container {
+	width: 900px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 strong {
 	/*font-style: italic;*/
 	text-transform: uppercase;
 }
 
+p>strong {
+	background: rgba(255, 255, 255, 0.3)
+}
+
+#lorem {
+	width: 550px;
+	margin-left: auto;
+	margin-right: 30px;
+	margin-top: 30px;
+	float: left;
+	padding-right: 30px;
+	border-right: dotted 1px white;
+	min-height: 300px;
+	text-align: justify;
+}
+
+#lorem>p {
+	font-weight: lighter;
+}
+
 .content {
-	width: 400px;
+	width: 250px;
 	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
+	float: left;
+	border-right: dotted 1px white;
 }
 
 h1 {

@@ -8,22 +8,24 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-	<div class="header">
-		<h1>Lorem ipsum dolor</h1> 
-		<div class="left-space">
-			<h1><strong>Hangman</strong> sit amet</h1>
+	<div class="container">
+		<div class="header">
+			<h1>Lorem ipsum dolor</h1> 
+			<div class="left-space">
+				<h1><strong>Hangman</strong> sit amet</h1>
+			</div>
 		</div>
+		<div id="lorem"><p>!</p></div>
+		<div class="content">
+			<p>Press any key to get started!</p>
+			<p>Wins:<br><span id="wins">0</span></p>
+			<p>Current word:<br><span id="word"></span></p>
+			<p>Guesses remaining:<br><span id="guesses">9</span></p>
+			<p>Letters guessed:<br><span id="letters"></span></p>
+			<p><span id="announcement"></span></p>
+		</div>
+		
+		<script src="assets/javascript/hangman.js"></script>
 	</div>
-	<div class="lorem"></div>
-	<div class="content">
-		<p>Press any key to get started!</p>
-		<p>Wins:<br><span id="wins">0</span></p>
-		<p>Current word:<br><span id="word"></span></p>
-		<p>Guesses remaining:<br><span id="guesses">9</span></p>
-		<p>Letters guessed:<br><span id="letters"></span></p>
-		<p><span id="announcement"></span></p>
-	</div>
-
-	<script src="assets/javascript/hangman.js"></script>
 </body>
 </html>
