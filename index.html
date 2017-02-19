@@ -10,8 +10,9 @@
 		<p>Press any key to get started!</p>
 		<p>Wins<br><span id="wins">0</span></p>
 		<p>Current word<br><span id="word"></span></p>
-		<p>Guesses remaining<br><span id="guesses">15</span></p>
+		<p>Guesses remaining<br><span id="guesses">9</span></p>
 		<p>Letters guessed<br><span id="letters"></span></p>
+		<p><span id="announcement"></span></p>
 	</div>
 
 	<script>
@@ -22,17 +23,25 @@
 		var guessedLetters = [];
 		var hintArray = [];
 		var wins = 0;
+		var reset = false;
 		var winSpan = document.getElementById('wins');
 		var wordSpan = document.getElementById('word');
 		var guessSpan = document.getElementById('guesses');
 		var letterSpan = document.getElementById('letters');
+		var announcementSpan = document.getElementById('announcement');
 
 		mixWordBank();
 
 		pickWord();
 
-		document.onkeyup = function(event) {// TODO: call guessLetter
-			testLetter(event.key);
+		document.onkeyup = function(event) {
+			if (reset === true) {
+				if (event.key === "1") {
+					nextGame();	
+				}
+			} else {
+				testLetter(event.key);
+			}
 		};
 
 		// function declarations
@@ -40,17 +49,19 @@
 			var mixedBank = [];
 			var length = wordBank.length;
 			for (var i = 0; i < length; i++) {
-				var randomIndex = Math.floor(Math.random(0, wordBank.length));
+				var randomIndex = Math.floor(Math.random() * wordBank.length);
 				mixedBank.push(wordBank.splice(randomIndex, 1)[0]);
 			}
 			wordBank = mixedBank;
 		}
 
 		function pickWord() { // Picks a new word, initializes spans
-			guessSpan.innerHTML = 15;
 			letterSpan.innerHTML = "";
 			guessedLetters = [];
 			hintArray = [];
+			guesses = 9;
+			guessSpan.innerHTML = 9;
+			announcementSpan.innerHTML = ""
 
 			if (wordIndex < wordBank.length - 1) {
 				wordIndex++;
@@ -64,7 +75,7 @@
 			updateHint();
 		};
 
-		function testLetter(guessedLetter) {
+		function testLetter(guessedLetter) { // TODO: check for alpha keys
 			if (guessedLetters.includes(guessedLetter) === false) {
 				guessedLetters.push(guessedLetter);
 				guessLetter(guessedLetter);
@@ -85,21 +96,20 @@
 				checkWin();
 			} else {
 				showWrongLetter(letter);
-				guesses--;
 				if (guesses === 0) {
-					youLose(); // TODO: write youLose function
+					youLose();
 				}
 			}
 		};
 
 		function updateHintArray(index, correctGuess) {
-			hintArray[index] = correctGuess
+			hintArray[index] = correctGuess;
 		}
 
 		function updateHint() {
 			wordSpan.innerHTML = "";
 			for (var i = 0; i < hintArray.length; i++) {
-				wordSpan.innerHTML += hintArray[i];
+				wordSpan.innerHTML += hintArray[i] + " ";
 			}
 		};
 
@@ -111,20 +121,27 @@
 		}
 
 		function showWrongLetter(incorrectGuess) {
+			guesses--;
 			letterSpan.innerHTML += incorrectGuess;
+			guessSpan.innerHTML = guesses;
 		};
 
 		function youWin() {
 			wins++;
 			winSpan.innerHTML = wins;
-			//...
-			pickWord();
+			announcementSpan.innerHTML = "Yay! press 1 to play again";
+			reset = true;
 		}
 
 		function youLose() {
-			//...
-			pickWord();
+			announcementSpan.innerHTML = "Uh-oh, press 1 to play again";
+			reset = true
 		};
+
+		function nextGame() {
+			pickWord();
+			reset = false;
+		}
 	</script>
 
 </body>
