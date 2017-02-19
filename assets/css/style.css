@@ -53,6 +53,7 @@ p>strong {
 	margin-right: auto;
 	float: left;
 	border-right: dotted 1px white;
+	padding-right: 10px;
 }
 
 h1 {
@@ -73,6 +74,17 @@ span {
 	color: #bbb;
 }
 
+.fadeIn {
+	opacity: 1.0;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.fadeOut {
+	opacity: 0.0;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
 
 #announcement {
 	font-weight
