@@ -8,9 +8,9 @@
 	<h1>Hangman!</h1>
 	<div class="content">
 		<p>Press any key to get started!</p>
-		<p>Wins<br><span id="wins"></span></p>
+		<p>Wins<br><span id="wins">0</span></p>
 		<p>Current word<br><span id="word"></span></p>
-		<p>Guesses remaining<br><span id="guesses"></span></p>
+		<p>Guesses remaining<br><span id="guesses">15</span></p>
 		<p>Letters guessed<br><span id="letters"></span></p>
 	</div>
 
@@ -19,51 +19,111 @@
 		var wordIndex = 0;
 		var currentWord = wordBank[wordIndex];
 		var guesses = 15;
-
+		var guessedLetters = [];
+		var hintArray = [];
+		var wins = 0;
 		var winSpan = document.getElementById('wins');
 		var wordSpan = document.getElementById('word');
-		var guessesSpan = document.getElementById('guesses');
-		var lettersSpan = document.getElementById('letters')
+		var guessSpan = document.getElementById('guesses');
+		var letterSpan = document.getElementById('letters');
 
-		
-		function pickWord() { // Picks a new word
-			if (wordIndex < wordBank.length) {
+		mixWordBank();
+
+		pickWord();
+
+		document.onkeyup = function(event) {// TODO: call guessLetter
+			testLetter(event.key);
+		};
+
+		// function declarations
+		function mixWordBank() { // mixes the wordBank so it is different every page visit
+			var mixedBank = [];
+			var length = wordBank.length;
+			for (var i = 0; i < length; i++) {
+				var randomIndex = Math.floor(Math.random(0, wordBank.length));
+				mixedBank.push(wordBank.splice(randomIndex, 1)[0]);
+			}
+			wordBank = mixedBank;
+		}
+
+		function pickWord() { // Picks a new word, initializes spans
+			guessSpan.innerHTML = 15;
+			letterSpan.innerHTML = "";
+			guessedLetters = [];
+			hintArray = [];
+
+			if (wordIndex < wordBank.length - 1) {
 				wordIndex++;
-				currentWord = wordbank[wordIndex];
 			} else {
 				wordIndex = 0;
-				currentWord = wordbank[wordIndex];
 			}
+			currentWord = wordBank[wordIndex];
+			for (var i = 0; i < currentWord.length; i++) {
+				hintArray.push("_");
+			}
+			updateHint();
 		};
+
+		function testLetter(guessedLetter) {
+			if (guessedLetters.includes(guessedLetter) === false) {
+				guessedLetters.push(guessedLetter);
+				guessLetter(guessedLetter);
+			}
+		}
 		
 		function guessLetter(letter) {
 			var goodGuess = false;
 			for (var i = 0; i < currentWord.length; i++) {
 				var check = currentWord[i];
 				if (letter === check) {
-					showLetter(i); // TODO: write showLetter function with letter index as argument
+					updateHintArray(i, letter);
 					goodGuess = true;
 				}
 			}
-			if (goodGuess === false) {
-				showWrongLetter(letter); //TODO: write showWrongLetter function with letter as argument
+			if (goodGuess === true) {
+				updateHint();
+				checkWin();
+			} else {
+				showWrongLetter(letter);
 				guesses--;
 				if (guesses === 0) {
-					youLose(); //TODO: write youLose function
+					youLose(); // TODO: write youLose function
 				}
 			}
 		};
 
-		function showLetter() {
+		function updateHintArray(index, correctGuess) {
+			hintArray[index] = correctGuess
+		}
 
+		function updateHint() {
+			wordSpan.innerHTML = "";
+			for (var i = 0; i < hintArray.length; i++) {
+				wordSpan.innerHTML += hintArray[i];
+			}
 		};
 
-		function showWrongLetter() {
+		function checkWin() {
+			checkString = hintArray.join("");
+			if (checkString === currentWord) {
+				youWin();
+			}
+		}
 
+		function showWrongLetter(incorrectGuess) {
+			letterSpan.innerHTML += incorrectGuess;
 		};
+
+		function youWin() {
+			wins++;
+			winSpan.innerHTML = wins;
+			//...
+			pickWord();
+		}
 
 		function youLose() {
-
+			//...
+			pickWord();
 		};
 	</script>
 
