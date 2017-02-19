@@ -17,14 +17,16 @@
 	<script>
 		var wordBank = ["test", "example"]; // Words to pick from
 		var wordIndex = 0;
-		var currentWord = wordBank[0];
-		var hangmanWord = pickWord; // Function to select a new word
+		var currentWord = wordBank[wordIndex];
+		var guesses = 15;
 
+		var winSpan = document.getElementById('wins');
+		var wordSpan = document.getElementById('word');
+		var guessesSpan = document.getElementById('guesses');
+		var lettersSpan = document.getElementById('letters')
 
-
-
-
-		function pickWord() {
+		
+		function pickWord() { // Picks a new word
 			if (wordIndex < wordBank.length) {
 				wordIndex++;
 				currentWord = wordbank[wordIndex];
@@ -32,7 +34,37 @@
 				wordIndex = 0;
 				currentWord = wordbank[wordIndex];
 			}
-		}
+		};
+		
+		function guessLetter(letter) {
+			var goodGuess = false;
+			for (var i = 0; i < currentWord.length; i++) {
+				var check = currentWord[i];
+				if (letter === check) {
+					showLetter(i); // TODO: write showLetter function with letter index as argument
+					goodGuess = true;
+				}
+			}
+			if (goodGuess === false) {
+				showWrongLetter(letter); //TODO: write showWrongLetter function with letter as argument
+				guesses--;
+				if (guesses === 0) {
+					youLose(); //TODO: write youLose function
+				}
+			}
+		};
+
+		function showLetter() {
+
+		};
+
+		function showWrongLetter() {
+
+		};
+
+		function youLose() {
+
+		};
 	</script>
 
 </body>
