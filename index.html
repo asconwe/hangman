@@ -5,6 +5,35 @@
 	<title>Hangman</title>
 </head>
 <body>
-	
+	<h1>Hangman!</h1>
+	<div class="content">
+		<p>Press any key to get started!</p>
+		<p>Wins<br><span id="wins"></span></p>
+		<p>Current word<br><span id="word"></span></p>
+		<p>Guesses remaining<br><span id="guesses"></span></p>
+		<p>Letters guessed<br><span id="letters"></span></p>
+	</div>
+
+	<script>
+		var wordBank = ["test", "example"]; // Words to pick from
+		var wordIndex = 0;
+		var currentWord = wordBank[0];
+		var hangmanWord = pickWord; // Function to select a new word
+
+
+
+
+
+		function pickWord() {
+			if (wordIndex < wordBank.length) {
+				wordIndex++;
+				currentWord = wordbank[wordIndex];
+			} else {
+				wordIndex = 0;
+				currentWord = wordbank[wordIndex];
+			}
+		}
+	</script>
+
 </body>
 </html>

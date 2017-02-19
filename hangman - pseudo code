@@ -1,0 +1,19 @@
+hangman - pseudo code
+
+set guesses to 15
+pick a random word
+
+display letter placehoders
+
+collect user guess
+
+check guess against letters in the word
+
+if the letter is in the word
+	display it
+
+if not
+	add it to the letters guessed
+	decrease guesses remaining
+	if guesses remaining is 0
+		you lose
