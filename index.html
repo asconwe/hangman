@@ -3,12 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hangman</title>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,100i|Open+Sans:300,400,400i" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+	<div class="header">
+		<h1>Lorem ipsum dolor</h1> 
+		<div class="left-space">
+			<h1><strong>Hangman</strong> sit amet</h1>
+		</div>
+	</div>
+	<div class="lorem"></div>
 	<div class="content">
-		<h1>Hangman!</h1>
 		<p>Press any key to get started!</p>
 		<p>Wins:<br><span id="wins">0</span></p>
 		<p>Current word:<br><span id="word"></span></p>
@@ -17,136 +24,6 @@
 		<p><span id="announcement"></span></p>
 	</div>
 
-	<script>
-		var wordBank = ["test", "example"]; // Words to pick from
-		var wordIndex = 0;
-		var currentWord = wordBank[wordIndex];
-		var guesses = 15;
-		var guessedLetters = [];
-		var hintArray = [];
-		var wins = 0;
-		var reset = false;
-		var winSpan = document.getElementById('wins');
-		var wordSpan = document.getElementById('word');
-		var guessSpan = document.getElementById('guesses');
-		var letterSpan = document.getElementById('letters');
-		var announcementSpan = document.getElementById('announcement');
-
-		mixWordBank();
-
-		pickWord();
-
-		document.onkeyup = function(event) {
-			if (reset === true) {
-				if (event.key === "1") {
-					nextGame();	
-				}
-			} else {
-				if (event.keyCode <= 90 && event.keyCode >= 65) {
-					testLetter(event.key);
-				}
-			}
-		};
-
-		// function declarations
-		function mixWordBank() { // mixes the wordBank so it is different every page visit
-			var mixedBank = [];
-			var length = wordBank.length;
-			for (var i = 0; i < length; i++) {
-				var randomIndex = Math.floor(Math.random() * wordBank.length);
-				mixedBank.push(wordBank.splice(randomIndex, 1)[0]);
-			}
-			wordBank = mixedBank;
-		}
-
-		function pickWord() { // Picks a new word, initializes spans
-			letterSpan.innerHTML = "";
-			guessedLetters = [];
-			hintArray = [];
-			guesses = 9;
-			guessSpan.innerHTML = 9;
-			announcementSpan.innerHTML = ""
-
-			if (wordIndex < wordBank.length - 1) {
-				wordIndex++;
-			} else {
-				wordIndex = 0;
-			}
-			currentWord = wordBank[wordIndex];
-			for (var i = 0; i < currentWord.length; i++) {
-				hintArray.push("_");
-			}
-			updateHint();
-		};
-
-		function testLetter(guessedLetter) { // TODO: check for alpha keys
-			if (guessedLetters.includes(guessedLetter) === false) {
-				guessedLetters.push(guessedLetter);
-				guessLetter(guessedLetter);
-			}
-		}
-		
-		function guessLetter(letter) {
-			var goodGuess = false;
-			for (var i = 0; i < currentWord.length; i++) {
-				var check = currentWord[i];
-				if (letter === check) {
-					updateHintArray(i, letter);
-					goodGuess = true;
-				}
-			}
-			if (goodGuess === true) {
-				updateHint();
-				checkWin();
-			} else {
-				showWrongLetter(letter);
-				if (guesses === 0) {
-					youLose();
-				}
-			}
-		};
-
-		function updateHintArray(index, correctGuess) {
-			hintArray[index] = correctGuess;
-		}
-
-		function updateHint() {
-			wordSpan.innerHTML = "";
-			for (var i = 0; i < hintArray.length; i++) {
-				wordSpan.innerHTML += hintArray[i] + " ";
-			}
-		};
-
-		function checkWin() {
-			checkString = hintArray.join("");
-			if (checkString === currentWord) {
-				youWin();
-			}
-		}
-
-		function showWrongLetter(incorrectGuess) {
-			guesses--;
-			letterSpan.innerHTML += incorrectGuess + " ";
-			guessSpan.innerHTML = guesses;
-		};
-
-		function youWin() {
-			wins++;
-			winSpan.innerHTML = wins;
-			announcementSpan.innerHTML = "Yay! press 1 to play again";
-			reset = true;
-		}
-
-		function youLose() {
-			announcementSpan.innerHTML = "Uh-oh, press 1 to play again";
-			reset = true
-		};
-
-		function nextGame() {
-			pickWord();
-			reset = false;
-		}
-	</script>
-
+	<script src="assets/javascript/hangman.js"></script>
 </body>
 </html>

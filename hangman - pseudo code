@@ -11,6 +11,8 @@ check guess against letters in the word
 
 if the letter is in the word
 	display it
+	if all the letters match
+		you win
 
 if not
 	add it to the letters guessed

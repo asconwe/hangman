@@ -1,18 +1,36 @@
 body {
 	color: white;
 	background: #336;
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
+	padding-top: 100px;
+}
+
+.header {
+	width: 900px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.left-space {
+	margin-left: 200px;
+}
+
+strong {
+	/*font-style: italic;*/
+	text-transform: uppercase;
 }
 
 .content {
 	width: 400px;
+	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 h1 {
+	font-family: 'Alegreya Sans SC', sans-serif;
 	font-size: 3em;
-	line-height: 3em;
+	line-height: 1.2em;
 }
 
 p {
