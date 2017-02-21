@@ -40,6 +40,7 @@ p>strong {
 	border-right: dotted 1px white;
 	min-height: 300px;
 	text-align: justify;
+	opacity: 1.0;
 }
 
 #lorem>p {
@@ -74,16 +75,16 @@ span {
 	color: #bbb;
 }
 
-.fadeIn {
+#lorem.fadeIn {
 	opacity: 1.0;
 	-webkit-transition: opacity 0.5s;
 	transition: opacity 0.5s;
 }
 
-.fadeOut {
+#lorem.fadeOut {
 	opacity: 0.0;
 	-webkit-transition: opacity 0.5s;
-	transition: opacity 0.5s;
+	transition: opacity 0.75s;
 }
 
 #announcement {

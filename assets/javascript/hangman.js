@@ -85,7 +85,6 @@
 			guesses = 9;
 			guessSpan.innerHTML = 9;
 			announcementSpan.innerHTML = "";
-			fadeLorem();
 
 			if (wordIndex < wordBank.length - 1) {
 				wordIndex++;
@@ -97,6 +96,7 @@
 				hintArray.push("_");
 			}
 			updateHint();
+			setTimeout(fadeLorem, 500);
 		};
 
 		function testLetter(guessedLetter) { // TODO: check for alpha keys
