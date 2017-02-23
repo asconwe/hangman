@@ -177,7 +177,7 @@
 					i++;
 				}
 			}
-			loremDiv.innerHTML = "<p>" + loremFullArray.join(" ");
+			loremDiv.innerHTML = "<p>" + loremFullArray.join(" ") + "</p>";
 			//fade in
 			loremDiv.className = "fadeIn";
 		}
