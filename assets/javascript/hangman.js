@@ -161,7 +161,7 @@
 		function youLose() {
 			showLorem();
 			announcementSpan.innerHTML = "Uh-oh, it was " + currentWord + "! Press 1 to play again";
-			reset = true
+			reset = true;
 		};
 
 		function showLorem() {
